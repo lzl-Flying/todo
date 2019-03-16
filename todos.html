@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="TODO.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>{{message}}</h1>
+            <div class="add-todo">
+                <input class="inp"
+                type="text"
+                placeholder="请输入您要添加的项"
+                v-model='newTodo'
+                @keyup.enter='addTodo'>
+                <button class="inp-add" @click='addTodo'>new</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <ul class="show-text">
+                <li v-if ='todos.length == 0' class="list-item" style='text-align:center; color:#888;'>{{ iftodos }}</li>
+                <li v-for='todo in filterTodos'
+                class="list-item"
+                :key='todo.id'
+                :class='{ complete: todo.completed }'>
+                    <input type="checkbox" class="choose" v-model='todo.completed'>
+                    <p class="item">{{ todo.title }}</p>
+                    <span class="clear" @click='removeTodo(todo)'>x</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <div class="item-sum"><span>{{ todos.length }}</span>   item</div>
+            <ul class="choice">
+                <li @click="handleclick('all')">all</li>
+                <li @click="handleclick('active')">active</li>
+                <li @click="handleclick('checked')">checked</li>
+            </ul>
+            <button class="delete" @click='dele'>delete</button>
+        </div>
+    </div>
+    <script src="TODO.js"></script>
+</body>
+</html>
